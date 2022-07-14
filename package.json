@@ -12,6 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@ladjs/graceful": "^3.0.2",
     "aws-sdk": "^2.1174.0",
     "bree": "^9.1.1",
     "dotenv": "^16.0.1",

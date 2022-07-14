@@ -1,6 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const Bree = require("bree");
+const Graceful = require('@ladjs/graceful');
 
 // cron: '30 08 ? * MON,TUE,WED,THU,FRI',
 // cronValidate: {
@@ -16,6 +17,9 @@ const bree = new Bree({
         }
     ]
 })
+
+const graceful = new Graceful({ brees: [bree] });
+graceful.listen();
 
 bree.start();
 
