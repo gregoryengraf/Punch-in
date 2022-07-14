@@ -1,0 +1,23 @@
+{
+  "name": "ponto",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "npx nodemon server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "aws-sdk": "^2.1174.0",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "node-schedule": "^2.1.0",
+    "puppeteer": "^15.4.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.19"
+  }
+}
