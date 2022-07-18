@@ -11,9 +11,7 @@ const s3 = new aws.S3({
 });
 
 (async () => {
-    const browser = await pup.launch({
-        ignoreDefaultArgs: ['--disable-extensions']
-    });
+    const browser = await pup.launch({headless: true});
     const page = await browser.newPage();
 
     console.log("Inicia");
@@ -42,7 +40,7 @@ const s3 = new aws.S3({
 
     console.log("Clica no ponto");
     // await page.mouse.click(990, 578);
-    await page.mouse.click(1009, 514);
+    await page.mouse.click(1092, 479);
     await page.waitForTimeout(2000);
 
     console.log("Gera print do ponto");
