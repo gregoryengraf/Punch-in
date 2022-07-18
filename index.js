@@ -17,10 +17,7 @@ const bree = new Bree({
 const graceful = new Graceful({ brees: [bree] });
 graceful.listen();
 
-// bree.start();
-(async () => {
-    await bree.start();
-})();
+bree.start();
 
 const app = express();
 app.get('/', function (req, res) {

@@ -11,7 +11,9 @@ const s3 = new aws.S3({
 });
 
 (async () => {
-    const browser = await pup.launch({headless: true});
+    const browser = await pup.launch({
+        ignoreDefaultArgs: ['--disable-extensions']
+    });
     const page = await browser.newPage();
 
     console.log("Inicia");
