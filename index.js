@@ -10,11 +10,22 @@ const bree = new Bree({
     jobs: [
         {
             name: 'point',
-            cron: '30 08 ? * MON,TUE,WED,THU,FRI',
+            cron: '30 08 ? * 1,2,3,4,5,6',
+            cronValidate: {
+                override: {
+                  useBlankDay: true
+                }
+            }
         },
         {
-            name: 'point',
-            cron: '40 17 ? * MON,TUE,WED,THU,FRI',
+            name: 'point 2',
+            cron: '58 17 ? * 1,2,3,4,5,6',
+            path: './jobs/point.js',
+            cronValidate: {
+                override: {
+                  useBlankDay: true
+                }
+            }
         }
     ]
 })

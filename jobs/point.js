@@ -52,8 +52,8 @@ async function postMessageToTeams(message) {
     await page.waitForTimeout(10000);
 
     console.log("Clica no ponto");
-    await page.mouse.click(1088, 543);
-    // await page.mouse.click(1092, 479);
+    // await page.mouse.click(1088, 543);
+    await page.mouse.click(1092, 479);
     await page.waitForTimeout(2000);
 
     console.log("Gera print do ponto");
