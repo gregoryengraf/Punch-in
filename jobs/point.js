@@ -1,6 +1,7 @@
-const pup = require("puppeteer");
-const aws = require("aws-sdk");
-const user = process.env.PONTO_USER;
+const pup      = require("puppeteer");
+const aws      = require("aws-sdk");
+const axios    = require("axios");
+const user     = process.env.PONTO_USER;
 const password = process.env.PONTO_PASS;
 
 const s3 = new aws.S3({
@@ -9,6 +10,18 @@ const s3 = new aws.S3({
     secretAccessKey: process.env.VULTR_SECRET_KEY,
     region: process.env.VULTR_REGION
 });
+
+async function postMessageToTeams(message) {
+    try {
+        const response = await axios.post(process.env.TEAMS_WEBHOOK_URL, {text: message}, {
+            headers: {'content-type': 'application/json'},
+        });
+        console.log(`${response.status} - ${response.statusText}`);
+        return `${response.status} - ${response.statusText}`;
+    } catch (err) {
+        return err;
+    }
+}
 
 (async () => {
     const browser = await pup.launch({headless: true});
@@ -39,15 +52,18 @@ const s3 = new aws.S3({
     await page.waitForTimeout(10000);
 
     console.log("Clica no ponto");
-    // await page.mouse.click(1088, 543);
-    await page.mouse.click(1092, 479);
+    await page.mouse.click(1088, 543);
+    // await page.mouse.click(1092, 479);
     await page.waitForTimeout(2000);
 
     console.log("Gera print do ponto");
     const dateNow = new Date().getTime();
     const screenshot = await page.screenshot();
     const params = {Bucket: 'ponto', Key: `${dateNow}_ponto.png`, ACL: 'public-read', Body: screenshot};
-    s3.upload(params, (err, data) => console.log(data.Location));
+    s3.upload(params, (err, data) => {
+        console.log("Notifica o teams");
+        postMessageToTeams(`Ponto batido! ${data.Location}`);
+    });
 
     await page.waitForTimeout(500);
     console.log("Finaliza");
