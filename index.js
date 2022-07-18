@@ -14,7 +14,7 @@ const bree = new Bree({
         },
         {
             name: 'point',
-            cron: '35 17 ? * MON,TUE,WED,THU,FRI',
+            cron: '40 17 ? * MON,TUE,WED,THU,FRI',
         }
     ]
 })
