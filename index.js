@@ -19,7 +19,7 @@ const bree = new Bree({
         },
         {
             name: 'point 2',
-            cron: '00 18 ? * 1,2,3,4,5,6',
+            cron: '30 17 ? * 1,2,3,4,5,6',
             path: './jobs/point.js',
             cronValidate: {
                 override: {
