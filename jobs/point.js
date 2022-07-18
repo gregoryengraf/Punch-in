@@ -39,7 +39,7 @@ const s3 = new aws.S3({
     await page.waitForTimeout(10000);
 
     console.log("Clica no ponto");
-    // await page.mouse.click(990, 578);
+    // await page.mouse.click(1088, 543);
     await page.mouse.click(1092, 479);
     await page.waitForTimeout(2000);
 
