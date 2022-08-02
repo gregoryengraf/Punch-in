@@ -23,7 +23,7 @@ const point = async function() {
         pointTries = 0;
         return;
     }
-    const browser = await pup.launch({headless: false});
+    const browser = await pup.launch({headless: true});
     const page = await browser.newPage();
 
     console.log("Inicia");
