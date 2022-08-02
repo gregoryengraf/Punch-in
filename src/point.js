@@ -88,7 +88,8 @@ const point = async function() {
 
     await page.waitForTimeout(500);
     console.log("Finaliza");
-    sendPointMessage("Processo finalizado!", screenshot);
+
+    uploadScreenshot(screenshot)
     await browser.close();
 }
 
