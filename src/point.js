@@ -62,7 +62,7 @@ const point = async function() {
     // const pointSuccess = await page.evaluate(() => window.find('Ponto registrado com sucesso!'));
 
     console.log("Gera print do ponto");
-    let screenshot = await page.screenshot();
+    const screenshot1 = await page.screenshot();
 
     let pointSuccess = await page.evaluate(() => window.find('Ponto registrado com sucesso!'));
     console.log('pointSuccess ', pointSuccess);
@@ -80,7 +80,7 @@ const point = async function() {
         pointSuccess = await page.evaluate(() => window.find('Ponto registrado com sucesso!'));
         if (!pointSuccess) {
             pointTries +=1;
-            sendPointMessage(`${pointTries}..: Não consegui bater o ponto, estou tentando novamente...`, screenshot);
+            sendPointMessage(`${pointTries}..: Não consegui bater o ponto, estou tentando novamente...`, screenshot1);
             point();
             return;
         }
@@ -89,6 +89,7 @@ const point = async function() {
     await page.waitForTimeout(500);
     console.log("Finaliza");
 
+    const screenshot = await page.screenshot();
     uploadScreenshot(screenshot)
     await browser.close();
 }
