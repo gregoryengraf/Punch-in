@@ -42,6 +42,9 @@ bot.on('message', (msg) => {
         bot.sendMessage(msg.chat.id,"Ok, vou bater o seu ponto agora!");
         makePoint();
     }
+    if (msg.text.toString().toLowerCase().indexOf("dev") === 0) {
+        bot.sendMessage(msg.chat.id,"Ok, estamos em DEV hein!");
+    }
 });
 
 const app = express();
