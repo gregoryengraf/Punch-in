@@ -5,6 +5,7 @@ const Graceful = require("@ladjs/graceful");
 const Cabin    = require("cabin");
 const TelegramBot = require("node-telegram-bot-api");
 const { makePoint } = require("./point");
+const { s3 } = require("./services");
 const bree = new Bree({
     logger: new Cabin(),
     jobs: [
@@ -48,7 +49,16 @@ bot.on('message', (msg) => {
 });
 
 const app = express();
+
 app.get('/', function (req, res) {
     res.send(`Olá ${process.env.NAME} hoje é ${new Date().toString()}`);
 });
+
+app.get('/list-files', function(req, res) {
+    // s3.deleteObject({Bucket: process.env.VULTR_BUCKET}, function(err, data) {
+    //     console.log("dados: ", data);
+    // });
+    res.json({msg: 'Teste files'}).status(200);
+});
+
 app.listen(3000, () => console.log(`Server "${process.env.ENVIROMENT_NAME}" is running on: localhost:3000`));

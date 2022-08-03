@@ -1,15 +1,8 @@
-const pup      = require("puppeteer");
-const aws      = require("aws-sdk");
-const user     = process.env.PONTO_USER;
-const password = process.env.PONTO_PASS;
+const pup                  = require("puppeteer");
+const { s3 }               = require("./services");
+const user                 = process.env.PONTO_USER;
+const password             = process.env.PONTO_PASS;
 const { sendPointMessage } = require("./telegram");
-
-const s3 = new aws.S3({
-    endpoint: process.env.VULTR_ENDPOINT,
-    accessKeyId: process.env.VULTR_ACCESS_KEY,
-    secretAccessKey: process.env.VULTR_SECRET_KEY,
-    region: process.env.VULTR_REGION
-});
 
 let pointTries = 0;
 exports.makePoint = async function() {
@@ -17,6 +10,12 @@ exports.makePoint = async function() {
 };
 
 const point = async function() {
+    if (process.env.ENVIROMENT_NAME === 'dev') {
+        const devMsg = "Você está em ambiente de desenvolvimento, nenhuma ação foi feita!";
+        console.log(devMsg);
+        sendPointMessage(devMsg);
+        return;
+    }
     console.log(`Tentativas: ${pointTries}`);
     if (pointTries > 3) {
         sendPointMessage(`Esquece, tentei por ${pointTries} vezes bater o ponto e não consegui...faça manualmente!`);
